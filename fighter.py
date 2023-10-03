@@ -21,12 +21,15 @@ class Fighter(arcade.Sprite):
         if self.change_x == -1 :
             if self.center_x > 0:
                 self.center_x -= self.speed
+
         elif self.change_x == 1 :
             if self.center_x < self.game_width :
                 self.center_x += self.speed
+
         elif self.change_y == 1 :
             if self.center_y < self.game_height:
                 self.center_y += self.speed
+                
         elif self.change_y == -1 :
             if self.center_y > 0:
                 self.center_y -= self.speed

@@ -9,7 +9,7 @@ from bullet import Bullet
 
 class Game(arcade.Window):
     def __init__(self):
-        super().__init__(width=1000, height= 800, title= "StarWars 2023")
+        super().__init__(width=800, height= 600, title= "StarWars 2023")
         arcade.set_background_color(arcade.color.DARK_BLUE)
         self.background = arcade.load_texture(":resources:images/backgrounds/stars.png")
         self.me = Fighter(self, self.width, self.height, "YODA")
@@ -18,7 +18,9 @@ class Game(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         arcade.draw_lrwh_rectangle_textured(0 ,0 ,self.width ,self.height , self.background)
+        
         self.me.draw()
+
         for enemy in self.them:
             enemy.draw()
         arcade.finish_render()
@@ -40,7 +42,7 @@ class Game(arcade.Window):
         elif symbol == arcade.key.S or symbol == arcade.key.DOWN :
             self.me.change_y = -1
             
-        elif symbol == arcade.key.SPACE:
+        elif symbol == arcade.key.Q:
             self.me.fire()
 
     def on_key_release(self, symbol: int, modifiers: int):
@@ -48,24 +50,25 @@ class Game(arcade.Window):
         self.me.change_y = 0
 
     def on_update(self, delta_time: float):
+        
         self.me.move()
 
         for enemy in self.them:
             if arcade.check_for_collision(self.me, enemy):
-                print("Game Over")
+                print("Game Over 💀")
                 exit(0)
 
         for enemy in self.them:
             enemy.move()
+
+        for bullet in self.me.bullet_list:
+            bullet.move()
 
         for enemy in self.them:
             for bullet in self.me.bullet_list:
                 if arcade.check_for_collision(enemy, bullet):
                     self.them.remove(enemy)
                     self.me.bullet_list.remove(bullet)
-
-        for bullet in self.bullet_list:
-            bullet.move()
 
         for enemy in self.them:
             if enemy.center_y < 0:
