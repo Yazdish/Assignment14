@@ -7,7 +7,7 @@ It is very easy game using **arcade** library.
 The python version felan bisar o injur kosshera.
 [arcade](https://api.arcade.academy/en/latest/index.html)
 
-![Screen Shot](felanbisar.png)
+![Screen Shot](sc.png)
 
 ---
 
